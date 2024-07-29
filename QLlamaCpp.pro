@@ -1,22 +1,31 @@
-QT -= gui
+QT       += core gui
 
-TEMPLATE = lib
-CONFIG += staticlib
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++17
+CONFIG += c++2b
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    qllamacpp.cpp
+    main.cpp \
+    mainwindow.cpp
 
 HEADERS += \
-    qllamacpp.h
+    QGrammarParser.hpp \
+    QLlamaDefines.h \
+    QLlamaExceptions.hpp \
+    mainwindow.h
+
+FORMS += \
+    mainwindow.ui
+
+unix: LIBS += -L/usr/local/lib -lllama -lllava_shared
+#win32: LIBS += -LC:\Program Files\Llama\lib -llama -lllava_shared
+
 
 # Default rules for deployment.
-unix {
-    target.path = $$[QT_INSTALL_PLUGINS]/generic
-}
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
