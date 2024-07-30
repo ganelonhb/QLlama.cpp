@@ -9,13 +9,33 @@ CONFIG += c++2b
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    common/build-info.cpp \
+    common/common.cpp \
+    common/console.cpp \
+    common/grammar-parser.cpp \
+    common/json-schema-to-grammar.cpp \
+    common/ngram-cache.cpp \
+    common/sampling.cpp \
+    common/train.cpp \
+    llava/clip.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
-    QGrammarParser.hpp \
-    QLlamaDefines.h \
-    QLlamaExceptions.hpp \
+    QLlamaInference.hpp \
+    common/base64.hpp \
+    common/common.h \
+    common/console.h \
+    common/grammar-parser.h \
+    common/json-schema-to-grammar.h \
+    common/json.hpp \
+    common/log.h \
+    common/ngram-cache.h \
+    common/sampling.h \
+    common/stb_image.h \
+    common/train.h \
+    llava/clip.h \
+    llava/llava.h \
     mainwindow.h
 
 FORMS += \
@@ -29,3 +49,8 @@ unix: LIBS += -L/usr/local/lib -lllama -lllava_shared
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    common/CMakeLists.txt \
+    common/build-info.cpp.in \
+    common/cmake/build-info-gen-cpp.cmake
