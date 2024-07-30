@@ -8,6 +8,8 @@ CONFIG += c++2b
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+INCLUDEPATH += $$PWD/common $$PWD/llava $$PWD/ggml
+
 SOURCES += \
     common/build-info.cpp \
     common/common.cpp \
@@ -34,6 +36,17 @@ HEADERS += \
     common/sampling.h \
     common/stb_image.h \
     common/train.h \
+    ggml/ggml-alloc.h \
+    ggml/ggml-backend.h \
+    ggml/ggml-blas.h \
+    ggml/ggml-cann.h \
+    ggml/ggml-cuda.h \
+    ggml/ggml-kompute.h \
+    ggml/ggml-metal.h \
+    ggml/ggml-rpc.h \
+    ggml/ggml-sycl.h \
+    ggml/ggml-vulkan.h \
+    ggml/ggml.h \
     llava/clip.h \
     llava/llava.h \
     mainwindow.h
@@ -41,7 +54,7 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-unix: LIBS += -L/usr/local/lib -lllama -lllava_shared
+unix: LIBS += -L/usr/local/lib -lllama -lllava_shared -lggml
 #win32: LIBS += -LC:\Program Files\Llama\lib -llama -lllava_shared
 
 
